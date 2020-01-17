@@ -18,7 +18,7 @@ output = open('output.txt', 'w')
 
 for x in range(19):
 
-    print('<a-entity line=\"start: %7.3f .1251 .225; end: %7.3f .1251 -.225; color: black\"></a-entity>' % (var1 + (0.025*x), var1 + (0.025*x)) , file = output) 
-    print('<a-entity line=\"start: -.225 .1251 %7.3f; end: .225 .1251 %7.3f; color: black\"></a-entity>' % (var2 - (0.025*x), var2 - (0.025*x)) , file = output) 
+    print('<a-entity id=\"x%2d\" line=\"start: %7.3f .1251 .225; end: %7.3f .1251 -.225; color: black\"></a-entity>' % (x+1, var1 + (0.025*x), var1 + (0.025*x)) , file = output) 
+    print('<a-entity id=\"y%2d\" line=\"start: -.225 .1251 %7.3f; end: .225 .1251 %7.3f; color: black\"></a-entity>' % (x+1, var2 - (0.025*x), var2 - (0.025*x)) , file = output) 
 
 output.close()
