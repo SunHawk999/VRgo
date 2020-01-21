@@ -42,9 +42,9 @@ function CreateLines(target: string, lines: number): any{
         let xline = document.createElement('a-entity');
         let zline = document.createElement('a-entity');
         xline.setAttribute("id", "x"+(i+1));
-        xline.setAttribute("line", "start: "+(-(width/2 - xlinedist)+(xlinedist*i))+" "+(height/2 + 0.0002)+" "+(width/2 - xlinedist)+"; end: "+(-(width/2 - xlinedist)+(xlinedist*i))+" "+(height/2 + 0.0002)+" "+-(width/2 - xlinedist)+"; color: black");
+        xline.setAttribute("line", "start: "+(-(width/2 - xlinedist)+(xlinedist*i))+" "+(height/2 + 0.0002)+" "+(depth/2 - zlinedist)+"; end: "+(-(width/2 - xlinedist)+(xlinedist*i))+" "+(height/2 + 0.0002)+" "+-(depth/2 - zlinedist)+"; color: black");
         zline.setAttribute("id", "z"+(i+1));
-        zline.setAttribute("line", "start: "+-(depth/2 - zlinedist)+" "+(height/2 + 0.0002)+" "+((depth/2 - zlinedist)-(zlinedist*i))+"; end: "+(depth/2 - zlinedist)+" "+(height/2 + 0.0002)+" "+((depth/2 - zlinedist)-((zlinedist)*i))+"; color: black")
+        zline.setAttribute("line", "start: "+-(width/2 - xlinedist)+" "+(height/2 + 0.0002)+" "+((depth/2 - zlinedist)-(zlinedist*i))+"; end: "+(width/2 - xlinedist)+" "+(height/2 + 0.0002)+" "+((depth/2 - zlinedist)-((zlinedist)*i))+"; color: black")
 
         mainelement.appendChild(xline);
         mainelement.appendChild(zline);
