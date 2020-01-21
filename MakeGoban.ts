@@ -42,7 +42,9 @@ function CreateLines(target: string, lines: number): any{
     }
 }
 
-//Create star points, is this much lines of code necessary?
+//Create star points
+//TODO: Make it so that certain points are made for specific line numbers, 
+//i.e. 19x19, 9x9.
 function CreateStarPoints(target: string, lines: number): any{
     let mainelement: any = document.getElementById(target);
     let height: any = GetElementAttribute(target, "height");
