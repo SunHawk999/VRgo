@@ -2,10 +2,10 @@
   <head>
     <meta charset="utf-8">
     <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
-    <script src="LinesAndStars.js"></script>
+    <script src="MakeGoban.js"></script>
   </head>
   <body>
-    <a-scene>
+    <a-scene id="scene">
         <!--Units are in meters, 1:1 unit:meter-->
         <!--Goban : 50 x 50 x 25 cm-->
         
@@ -16,19 +16,24 @@
           <a-asset-item id="WteStone" src="assets/WteStone.gltf"></a-asset-item>
         </a-assets>
         
-        <a-box id="Goban" position="0 1.45 -1" rotation="0 0 0" color="#9C6C06" width=".5" depth=".5" height=".2" wireframe="false">
+        <!--<a-box id="Goban" position="0 1.45 -1" rotation="0 0 0" color="#9C6C06" width=".5" depth=".5" height=".2" wireframe="false">
 
           <a-gltf-model src="#BlkStone" position="0 .1 0"></a-gltf-model>
           <a-gltf-model src="#WteStone" position=".025 .1 0"></a-gltf-model>
-        </a-box>      
+        </a-box>-->      
         
         <a-sky color="#ECECEC"></a-sky>
     </a-scene>
   
     <script>
-      //Add lines and star points
-      CreateLines("Goban");
-      CreateStarPoints("Goban");
+      let lineNumber = 19;
+      let width = .3;
+      let depth = .3;
+
+      MakeGoban(lineNumber, width, depth, .2, [0, 1.45, -.5], [0,0,0], "#9C6C06", false);
+      //Make lines and star points
+      CreateLines("Goban19", 19);
+      CreateStarPoints("Goban19", 19);
     </script>
   
   </body>
