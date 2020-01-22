@@ -16,8 +16,8 @@
           <a-asset-item id="WteStone" src="assets/WteStone.gltf"></a-asset-item>
         </a-assets>
         
-          <a-gltf-model src="#BlkStone" position="0 1.45 -.5"></a-gltf-model>
-          <a-gltf-model src="#WteStone" position=".025 1.45 -0.5"></a-gltf-model>
+          <a-gltf-model src="#BlkStone" position="0 1.55 -.5"></a-gltf-model>
+          <a-gltf-model src="#WteStone" position=".025 1.55 -0.5"></a-gltf-model>
           
           <a-sky color="#ECECEC"></a-sky>
     </a-scene>
@@ -27,7 +27,7 @@
       let width = .5;
       let depth = .5;
       //Work on goban stones next?
-      MakeGoban(lineNumber, width, depth, .2, [0, 1.45, -.5], [0,0,0], "#9C6C06", true);
+      MakeGoban(lineNumber, width, depth, .2, [0, 1.45, -.5], [0,0,0], "#9C6C06", false);
       //Make lines and star points
       CreateLines("Goban"+lineNumber, lineNumber);
       CreateStarPoints("Goban"+lineNumber, lineNumber);
