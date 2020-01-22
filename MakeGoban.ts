@@ -43,42 +43,95 @@ function CreateLines(target: string, lines: number): any{
 }
 
 //Create star points
-//TODO: Make it so that certain points are made for specific line numbers, 
-//i.e. 19x19, 9x9.
 function CreateStarPoints(target: string, lines: number): any{
     let mainelement: any = document.getElementById(target);
     let height: any = GetElementAttribute(target, "height");
     let width: any = GetElementAttribute(target, 'width');
     let depth: any = GetElementAttribute(target, 'depth');
-    let xPoint: number = (width/(lines+1)) * 6;
-    let zPoint: number = (depth/(lines+1)) * 6;
+    
+    let sections: number;
+    //Switch cases for line ratios
+    switch(lines){
+    case(9):
+        sections = 2;
+        break;
+    case(13):
+        sections = 3;
+        break;
+    case(19):
+        sections = 6;
+        break;
+    default:
+        console.log("Invalid lines input, check linenumber for MakeGoban().");
+        break;
+    }
+    //Draw points for boards less than or equal to nine lines
+    if(lines == 9){
+        let xPoint: number = (width/(lines+1)) * sections;
+        let zPoint: number = (depth/(lines+1)) * sections;
+        let points: number[] = [-1, 1];
 
-    //First set of points
-    for(let i: number = -1; i < 2; i++){
-        var points1 = document.createElement('a-circle');
-        var points2 = document.createElement('a-circle');
-        var points3 = document.createElement('a-circle');
-        
-        points1.setAttribute("id", String(i+2));
-        points1.setAttribute("position", xPoint*(i)+" "+(height/2 + 0.0002)+" "+zPoint);
-        points1.setAttribute("rotation","270 0 0");
-        points1.setAttribute("color", "black");
-        points1.setAttribute("radius", "0.003");
+        //Draw points
+        for(let i of points){
+            var points1 = document.createElement('a-circle');
+            var points3 = document.createElement('a-circle');
+            
+            points1.setAttribute("id", String(i+2));
+            points1.setAttribute("position", xPoint*(i)+" "+(height/2 + 0.0002)+" "+zPoint);
+            points1.setAttribute("rotation","270 0 0");
+            points1.setAttribute("color", "black");
+            points1.setAttribute("radius", "0.003");
 
-        points2.setAttribute("id", String(i+5));
-        points2.setAttribute("position", xPoint*(i)+" "+(height/2 + 0.0002)+" 0");
-        points2.setAttribute("rotation","270 0 0");
-        points2.setAttribute("color", "black");
-        points2.setAttribute("radius", "0.003");
+            points3.setAttribute("id", String(i+8));
+            points3.setAttribute("position", xPoint*(i)+" "+(height/2 + 0.0002)+" "+-zPoint );
+            points3.setAttribute("rotation","270 0 0");
+            points3.setAttribute("color", "black");
+            points3.setAttribute("radius", "0.003");
 
-        points3.setAttribute("id", String(i+8));
-        points3.setAttribute("position", xPoint*(i)+" "+(height/2 + 0.0002)+" "+-zPoint );
-        points3.setAttribute("rotation","270 0 0");
-        points3.setAttribute("color", "black");
-        points3.setAttribute("radius", "0.003");
+            mainelement.appendChild(points1);
+            mainelement.appendChild(points3);
+        }
+            var points2 = document.createElement('a-circle');
+            points2.setAttribute("id", String(3));
+            points2.setAttribute("position","0 "+(height/2 + 0.0002)+" 0");
+            points2.setAttribute("rotation","270 0 0");
+            points2.setAttribute("color", "black");
+            points2.setAttribute("radius", "0.003");
+            mainelement.appendChild(points2);
+    }
+    
+    //Draw points for boards more than nine lines
+    else{
+        let xPoint: number = (width/(lines+1)) * sections;
+        let zPoint: number = (depth/(lines+1)) * sections;
 
-        mainelement.appendChild(points1);
-        mainelement.appendChild(points2);
-        mainelement.appendChild(points3);
+        //Draw points
+        for(let i: number = -1; i < 2; i++){
+            var points1 = document.createElement('a-circle');
+            var points2 = document.createElement('a-circle');
+            var points3 = document.createElement('a-circle');
+            
+            points1.setAttribute("id", String(i+2));
+            points1.setAttribute("position", xPoint*(i)+" "+(height/2 + 0.0002)+" "+zPoint);
+            points1.setAttribute("rotation","270 0 0");
+            points1.setAttribute("color", "black");
+            points1.setAttribute("radius", "0.003");
+
+            points2.setAttribute("id", String(i+5));
+            points2.setAttribute("position", xPoint*(i)+" "+(height/2 + 0.0002)+" 0");
+            points2.setAttribute("rotation","270 0 0");
+            points2.setAttribute("color", "black");
+            points2.setAttribute("radius", "0.003");
+
+            points3.setAttribute("id", String(i+8));
+            points3.setAttribute("position", xPoint*(i)+" "+(height/2 + 0.0002)+" "+-zPoint );
+            points3.setAttribute("rotation","270 0 0");
+            points3.setAttribute("color", "black");
+            points3.setAttribute("radius", "0.003");
+
+            mainelement.appendChild(points1);
+            mainelement.appendChild(points2);
+            mainelement.appendChild(points3);
+        }
     }
 }
