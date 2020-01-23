@@ -13,6 +13,13 @@ function MakeGoban(lines: number, width: number, depth: number, height: number, 
     document.getElementById('scene').appendChild(Goban);
 }
 
+//Code with AFRAME components in mind
+//Refer to this:
+//https://stackoverflow.com/questions/38880104/how-to-use-javascript-with-a-frame
+//https://github.com/aframevr/aframe/blob/master/docs/introduction/best-practices.md
+function MakeGobanTest(){
+}
+
 //Find attribute of specific element
 function GetElementAttribute(eltarget: string, elattribute: string): string{
     return document.getElementById(eltarget).getAttribute(elattribute);
