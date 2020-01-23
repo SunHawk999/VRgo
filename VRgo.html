@@ -4,6 +4,7 @@
     <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
     <script src="MakeGoban.js"></script>
     <script src="PlaceStone.js"></script>
+    <script src="SGFGoban.js"></script>
   </head>
   <body>
    <a-scene id="scene">
@@ -33,6 +34,7 @@
         //Make lines and star points
         CreateLines("Goban"+linenumber, linenumber);
         CreateStarPoints("Goban"+linenumber, linenumber);
+        MakePointEntities("Goban"+linenumber, linenumber, width, depth);
         PlaceStone("Goban"+linenumber, "#BlkStone", [0 ,.1, 0]);
       </script>
     </body>
