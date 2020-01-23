@@ -6,30 +6,36 @@
     <script src="PlaceStone.js"></script>
   </head>
   <body>
-    <a-scene id="scene">
+   <a-scene id="scene">
         <!--Units are in meters, 1:1 unit:meter-->
         <!--Goban : 50 x 50 x 25 cm-->
+
+        <!--https://stackoverflow.com/questions/38880104/how-to-use-javascript-with-a-frame-->
         
         <a-assets>
           <!--Should come back to these models and make them look better, or at lease with less ridges
               Also see how optimized they are-->
+          
           <a-asset-item id="BlkStone" src="assets/BlkStone.gltf"></a-asset-item>
           <a-asset-item id="WteStone" src="assets/WteStone.gltf"></a-asset-item>
         </a-assets>
-          <a-sky color="#ECECEC"></a-sky>
-    </a-scene>
-  
+          
+        <a-sky color="#ECECEC"></a-sky>
+    
+      </a-scene>
+    
     <script>
-      let linenumber = 19;
-      let width = .5;
-      let depth = .5;
-      //Work on goban stones next?
-      MakeGoban(linenumber, width, depth, .2, [0, 1.45, -.5], [0,0,0], "#9C6C06", false);
-      //Make lines and star points
-      CreateLines("Goban"+linenumber, linenumber);
-      CreateStarPoints("Goban"+linenumber, linenumber);
-      PlaceStone("Goban"+linenumber, "#BlkStone", [0 ,.1, 0]);
-    </script>
-  
-  </body>
+          
+          let linenumber = 19;
+          let width = .5;
+          let depth = .5;
+          //Work on goban stones next?
+          MakeGoban(linenumber, width, depth, .2, [0, 1.45, -.5], [0,0,0], "#9C6C06", false);
+          //Make lines and star points
+          CreateLines("Goban"+linenumber, linenumber);
+          CreateStarPoints("Goban"+linenumber, linenumber);
+          PlaceStone("Goban"+linenumber, "#BlkStone", [0 ,.1, 0]);
+      
+      </script>
+    </body>
 </html>
