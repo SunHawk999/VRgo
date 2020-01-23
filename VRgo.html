@@ -30,11 +30,11 @@
         let width = .5;
         let depth = .5;
         //Work on goban stones next?
-        MakeGoban(linenumber, width, depth, .2, [0, 1.45, -.5], [0,0,0], "#9C6C06", false);
+        MakeGoban(linenumber, width, depth, .2, [0, 1.45, -.5], [0,0,0], "#9C6C06", true);
         //Make lines and star points
         CreateLines("Goban"+linenumber, linenumber);
         CreateStarPoints("Goban"+linenumber, linenumber);
-        MakePointEntities("Goban"+linenumber, linenumber, width, depth);
+        MakePointEntities("Goban"+linenumber, linenumber, width, .2 ,depth);
         PlaceStone("Goban"+linenumber, "#BlkStone", [0 ,.1, 0]);
       </script>
     </body>
