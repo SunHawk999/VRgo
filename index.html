@@ -6,6 +6,7 @@
   </head>
   <body>
     <script src="Goban.js"></script>
+    <script src="Stone.js"></script>
     <a-scene id="scene" background="color: #ECECEC" stats>
       <!--Units are in meters, 1:1 unit:meter-->
       <!--Goban : 50 x 50 x 25 cm-->
@@ -21,7 +22,8 @@
       </a-assets>
       
       <a-entity goban position="0 1.45 -.5"></a-entity>
-    
+      <a-entity stone position="0 1.56 -.5"></a-entity>
+      <a-gltf-model src="#BlkStone" position=".05, 1.56 -.5"></a-gltf-model>
     </a-scene>
   </body>
  

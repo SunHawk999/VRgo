@@ -15,7 +15,7 @@ AFRAME.registerComponent('stone', {
             points.push(new THREE.Vector2(Math.sin(i/2)*data.width, Math.cos(i/2)*data.height));
         }
         this.geometry = new THREE.LatheBufferGeometry(points);
-        this.material = new THREE.MeshBasicMaterial({color:"#000000"});
+        this.material = new THREE.MeshLambertMaterial({color:"#000000"});
         this.lathe = new THREE.Mesh(this.geometry, this.material);
         object.add(this.lathe);
     },
