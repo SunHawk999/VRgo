@@ -25,6 +25,8 @@ AFRAME.registerComponent('goban', {
         var data = this.data;
         var el = this.el;
 
+        //Have a 'PlaceStone' function in here?
+
         //If 'oldData is empty then this means we're in the init process
         //No need to update
         if (Object.keys(oldData).length === 0){return;}
