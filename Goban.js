@@ -19,6 +19,15 @@ AFRAME.registerComponent('goban', {
         object.add(this.mesh);
 
         //Code for grid
+        //With GridHelper...
+        //Lower fps?
+        /*
+        var size = .475;
+        var grid = new THREE.GridHelper(size, data.lines-1);
+        grid.position.y = data.height/2 + .0002;
+        object.add(grid);
+        */
+
         //Loop here for that...
         let xlinedist = data.width/(data.lines+1);
         let zlinedist = data.depth/(data.lines+1); 
@@ -27,7 +36,7 @@ AFRAME.registerComponent('goban', {
         
         for(var i = 0; i < data.lines; i++){
             //Possible way to do this without creating news instance of geometry?
-            //Look into THREE.gridHelper?
+            //Creates multiple geometries this way...
             //Figure out BufferGeometry
             var xlineGeometry = new THREE.Geometry();
             var zlineGeometry = new THREE.Geometry();
