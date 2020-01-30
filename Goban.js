@@ -18,17 +18,6 @@ AFRAME.registerComponent('goban', {
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         object.add(this.mesh);
 
-        //Code for grid
-        //With GridHelper...
-        //Lower fps?
-        /*
-        var size = .475;
-        var grid = new THREE.GridHelper(size, data.lines-1);
-        grid.position.y = data.height/2 + .0002;
-        object.add(grid);
-        */
-
-        //Loop here for that...
         let xlinedist = data.width/(data.lines+1);
         let zlinedist = data.depth/(data.lines+1); 
         
@@ -38,17 +27,31 @@ AFRAME.registerComponent('goban', {
             //Possible way to do this without creating news instance of geometry?
             //Creates multiple geometries this way...
             //Figure out BufferGeometry
-            var xlineGeometry = new THREE.Geometry();
-            var zlineGeometry = new THREE.Geometry();
-            //xlines
-            xlineGeometry.vertices.push(new THREE.Vector3(-(data.width/2 - xlinedist)+(xlinedist*i), data.height/2 + 0.0002, (data.depth/2 - zlinedist)));
-            xlineGeometry.vertices.push(new THREE.Vector3(-(data.width/2 - xlinedist)+(xlinedist*i), data.height/2 + 0.0002, -(data.depth/2 - zlinedist)));
-            //zlines
-            zlineGeometry.vertices.push(new THREE.Vector3(-(data.width/2 - xlinedist), data.height/2 + 0.0002, (data.depth/2 - zlinedist)-(zlinedist*i)));
-            zlineGeometry.vertices.push(new THREE.Vector3((data.width/2 - xlinedist), data.height/2 + 0.0002, (data.depth/2 - zlinedist)-(zlinedist*i)));
+            var xlineGeometry = new THREE.BufferGeometry();
+            var zlineGeometry = new THREE.BufferGeometry();
+            var xpoints = new Float32Array(6);
+            var zpoints = new Float32Array(6);
+
+            xpoints = [-(data.width/2 - xlinedist)+(xlinedist*i),
+                        data.height/2 + 0.0002,
+                        (data.depth/2 - zlinedist),
+                       -(data.width/2 - xlinedist)+(xlinedist*i),
+                        data.height/2 + 0.0002,
+                        -(data.depth/2 - zlinedist)];
             
+            zpoints = [-(data.width/2 - xlinedist),
+                         data.height/2 + 0.0002,
+                        (data.depth/2 - zlinedist)-(zlinedist*i),
+                        (data.width/2 - xlinedist),
+                        data.height/2 + 0.0002,
+                        (data.depth/2 - zlinedist)-(zlinedist*i)];
+
+            xlineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(xpoints, 3));
             var xline = new THREE.Line(xlineGeometry, lineMaterial);
+            
+            zlineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(zpoints, 3));
             var zline = new THREE.Line(zlineGeometry, lineMaterial);
+            
             object.add(xline);
             object.add(zline); 
         }
