@@ -20,13 +20,29 @@ AFRAME.registerComponent('goban', {
 
         //Code for grid
         //Loop here for that...
-        var lineMaterial = new THREE.LineBasicMaterial({color: "#000000"});
-        var lineGeometry = new THREE.Geometry();
-        lineGeometry.vertices.push(new THREE.Vector3(0, 0, 0));
-        lineGeometry.vertices.push(new THREE.Vector3(1, 1, 1));
-        var line = new THREE.Line(lineGeometry, lineMaterial);
-        object.add(line); 
+        let xlinedist = data.width/(data.lines+1);
+        let zlinedist = data.depth/(data.lines+1); 
         
+        var lineMaterial = new THREE.LineBasicMaterial({color: "#000000"});
+        
+        for(var i = 0; i < data.lines; i++){
+            //Possible way to do this without creating news instance of geometry?
+            //Look into THREE.gridHelper?
+            //Figure out BufferGeometry
+            var xlineGeometry = new THREE.Geometry();
+            var zlineGeometry = new THREE.Geometry();
+            //xlines
+            xlineGeometry.vertices.push(new THREE.Vector3(-(data.width/2 - xlinedist)+(xlinedist*i), data.height/2 + 0.0002, (data.depth/2 - zlinedist)));
+            xlineGeometry.vertices.push(new THREE.Vector3(-(data.width/2 - xlinedist)+(xlinedist*i), data.height/2 + 0.0002, -(data.depth/2 - zlinedist)));
+            //zlines
+            zlineGeometry.vertices.push(new THREE.Vector3(-(data.width/2 - xlinedist), data.height/2 + 0.0002, (data.depth/2 - zlinedist)-(zlinedist*i)));
+            zlineGeometry.vertices.push(new THREE.Vector3((data.width/2 - xlinedist), data.height/2 + 0.0002, (data.depth/2 - zlinedist)-(zlinedist*i)));
+            
+            var xline = new THREE.Line(xlineGeometry, lineMaterial);
+            var zline = new THREE.Line(zlineGeometry, lineMaterial);
+            object.add(xline);
+            object.add(zline); 
+        }
     },
 
     update: function(oldData){
@@ -42,6 +58,11 @@ AFRAME.registerComponent('goban', {
            data.height !== oldData.height ||
            data.depth !== oldData.depth){
                 el.getObject3D('mesh').geometry = new THREE.BoxBufferGeometry(data.width, data.height, data.depth);
+        }
+
+        //Update for grid related changes
+        if(data.lines !== oldData.lines){
+            
         }
 
         //Material related properties change
