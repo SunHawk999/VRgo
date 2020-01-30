@@ -8,12 +8,25 @@ AFRAME.registerComponent('goban', {
     },
 
     init: function(){
+        //Code for goban shape
+        let object = this.el.object3D;
+
         var data = this.data;
-        var el = this.el;
+        //var el = this.el;
         this.geometry = new THREE.BoxBufferGeometry(data.width, data.height, data.depth);
         this.material = new THREE.MeshStandardMaterial({color: data.color});
         this.mesh = new THREE.Mesh(this.geometry, this.material);
-        el.setObject3D('mesh', this.mesh);
+        object.add(this.mesh);
+
+        //Code for grid
+        //Loop here for that...
+        var lineMaterial = new THREE.LineBasicMaterial({color: "#000000"});
+        var lineGeometry = new THREE.Geometry();
+        lineGeometry.vertices.push(new THREE.Vector3(0, 0, 0));
+        lineGeometry.vertices.push(new THREE.Vector3(1, 1, 1));
+        var line = new THREE.Line(lineGeometry, lineMaterial);
+        object.add(line); 
+        
     },
 
     update: function(oldData){
@@ -35,5 +48,9 @@ AFRAME.registerComponent('goban', {
         if(data.color !== oldData.color){
             el.getObject3D('mesh').material.color = new THREE.Color(data.color);
         }
+    },
+
+    remove: function(){
+        this.el.removeObject3D('mesh');
     }
 });
