@@ -18,43 +18,7 @@ AFRAME.registerComponent('goban', {
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         object.add(this.mesh);
 
-        let xlinedist = data.width/(data.lines+1);
-        let zlinedist = data.depth/(data.lines+1); 
-        
-        var lineMaterial = new THREE.LineBasicMaterial({color: "#000000"});
-        
-        for(var i = 0; i < data.lines; i++){
-            //Possible way to do this without creating news instance of geometry?
-            //Creates multiple geometries this way...
-            //Figure out BufferGeometry
-            var xlineGeometry = new THREE.BufferGeometry();
-            var zlineGeometry = new THREE.BufferGeometry();
-            var xpoints = new Float32Array(6);
-            var zpoints = new Float32Array(6);
-
-            xpoints = [-(data.width/2 - xlinedist)+(xlinedist*i),
-                        data.height/2 + 0.0002,
-                        (data.depth/2 - zlinedist),
-                       -(data.width/2 - xlinedist)+(xlinedist*i),
-                        data.height/2 + 0.0002,
-                        -(data.depth/2 - zlinedist)];
-            
-            zpoints = [-(data.width/2 - xlinedist),
-                         data.height/2 + 0.0002,
-                        (data.depth/2 - zlinedist)-(zlinedist*i),
-                        (data.width/2 - xlinedist),
-                        data.height/2 + 0.0002,
-                        (data.depth/2 - zlinedist)-(zlinedist*i)];
-
-            xlineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(xpoints, 3));
-            var xline = new THREE.Line(xlineGeometry, lineMaterial);
-            
-            zlineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(zpoints, 3));
-            var zline = new THREE.Line(zlineGeometry, lineMaterial);
-            
-            object.add(xline);
-            object.add(zline); 
-        }
+        CreateLines(object, data.width, data.height, data.depth, data.lines);
     },
 
     update: function(oldData){
@@ -74,7 +38,7 @@ AFRAME.registerComponent('goban', {
 
         //Update for grid related changes
         if(data.lines !== oldData.lines){
-            
+            CreateLines(this.el.object3D, data.width, data.height, data.depth, data.lines);
         }
 
         //Material related properties change
@@ -87,3 +51,45 @@ AFRAME.registerComponent('goban', {
         this.el.removeObject3D('mesh');
     }
 });
+
+function CreateLines(object, width, height, depth, lines){
+
+
+    let xlinedist = width/(lines+1);
+    let zlinedist = depth/(lines+1); 
+    
+    var lineMaterial = new THREE.LineBasicMaterial({color: "#000000"});
+
+    for(var i = 0; i < lines; i++){
+            //Possible way to do this without creating news instance of geometry?
+            //Creates multiple geometries this way...
+            //Figure out BufferGeometry
+            var xlineGeometry = new THREE.BufferGeometry();
+            var zlineGeometry = new THREE.BufferGeometry();
+            var xpoints = new Float32Array(6);
+            var zpoints = new Float32Array(6);
+
+            xpoints = [-(width/2 - xlinedist)+(xlinedist*i),
+                        height/2 + 0.0002,
+                        (depth/2 - zlinedist),
+                       -(width/2 - xlinedist)+(xlinedist*i),
+                        height/2 + 0.0002,
+                        -(depth/2 - zlinedist)];
+            
+            zpoints = [-(width/2 - xlinedist),
+                         height/2 + 0.0002,
+                        (depth/2 - zlinedist)-(zlinedist*i),
+                        (width/2 - xlinedist),
+                        height/2 + 0.0002,
+                        (depth/2 - zlinedist)-(zlinedist*i)];
+
+            xlineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(xpoints, 3));
+            var xline = new THREE.Line(xlineGeometry, lineMaterial);
+            
+            zlineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(zpoints, 3));
+            var zline = new THREE.Line(zlineGeometry, lineMaterial);
+            
+            object.add(xline);
+            object.add(zline); 
+        }
+}
