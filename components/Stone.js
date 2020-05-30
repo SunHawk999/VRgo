@@ -3,7 +3,7 @@ AFRAME.registerComponent('stone', {
         //Base size off of standard go stones
         size: {type: 'number', default: 1},
         width: {type: 'number', default: .01},
-        height: {type: 'number', default: 0.005},
+        height: {type: 'number', default: 0.0045},
         color: {type: 'string', default: 'blk'}
     },
 
